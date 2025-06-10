@@ -7,8 +7,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\RoleMiddleware;
 
 //common
+Route::middleware(['auth:sanctum', RoleMiddleware::class.':comon'])->group(function () {
+    Route::get('common/user/{id}',[CommonUserController::class,'index']);
+});
 
-Route::get('common/user/{id}',[CommonUserController::class,'index']) ->middleware(['auth:sanctum', RoleMiddleware::class.':comon']);
 Route::post('common/user',[CommonUserController::class,'store']);
 
 //auth
