@@ -7,21 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;  
 
-class CommonMiddleware
+class RoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
         $user = Auth::user();
         
-        if($user["role"] != "comon")
-        {
+        if($user["role"] != $role )
             return response()->json("you dont have permissions to access this route");
-        }
 
         return $next($request);
     }
