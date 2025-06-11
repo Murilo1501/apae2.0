@@ -16,6 +16,7 @@ Route::post('common/user',[CommonUserController::class,'store']);
 //admin
 Route::middleware(['auth:sanctum', RoleMiddleware::class.':admin'])->group(function () {
     Route::post('admin/user',[AdminUserController::class,'store']);
+    Route::get('admin/user/{id}',[AdminUserController::class,'index']);
 });
 
 

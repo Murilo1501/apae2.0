@@ -12,14 +12,18 @@ use Illuminate\Support\Facades\Hash;
 class CommonUserController extends Controller
 {
 
-    protected $model;
-
-    function __construct(){
-        $this->model = new UserModel();
-    }
-
    public function index(int $id){
-        $user =  $this->model->find($id);
+        $user = UserModel::where('id',$id)->where('role','comon')->first();
+
+         
+        if($user == null)
+        {
+            return response()->json([
+                "message" => "user not found"
+            ],404);
+        }
+
+        
         return response()->json([
             "User Data" => $user
         ]);
