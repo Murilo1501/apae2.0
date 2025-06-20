@@ -6,6 +6,7 @@ use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CommonUserController;
+use App\Http\Controllers\PartnerUserController;
 
 //common
 Route::middleware(['auth:sanctum', RoleMiddleware::class.':comon'])->group(function () {
@@ -17,6 +18,12 @@ Route::post('common/user',[CommonUserController::class,'store']);
 Route::middleware(['auth:sanctum', RoleMiddleware::class.':admin'])->group(function () {
     Route::post('admin/user',[AdminUserController::class,'store']);
     Route::get('admin/user/{id}',[AdminUserController::class,'index']);
+    Route::post('partner/user',[PartnerUserController::class,'store']);
+});
+
+//partner
+Route::middleware(['auth:sanctum',RoleMiddleware::class.':partner'])->group(function () {
+    Route::get('partner/user/{id}',[PartnerUserController::class,'index']);
 });
 
 

@@ -15,7 +15,6 @@ class CommonUserController extends Controller
    public function index(int $id){
         $user = UserModel::where('id',$id)->where('role','comon')->first();
 
-         
         if($user == null)
         {
             return response()->json([
@@ -23,7 +22,7 @@ class CommonUserController extends Controller
             ],404);
         }
 
-        
+
         return response()->json([
             "User Data" => $user
         ]);
